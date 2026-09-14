@@ -1,0 +1,34 @@
+.user-menu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-right: 1.5rem;
+
+  &__avatar {
+    width: 2.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__name {
+    color: var(--color-text-heading);
+    font-weight: bolder;
+  }
+
+  &__role {
+    color: var(--color-text-secondary);
+    font-weight: normal;
+    text-transform: capitalize;
+  }
+
+  &__chevron {
+    color: var(--color-text-heading);
+    transition: transform 0.2s ease;
+  }
+}

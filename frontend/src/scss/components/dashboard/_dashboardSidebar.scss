@@ -1,0 +1,51 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  border-right: 1px solid var(--color-border);
+
+  &__link {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    margin: 0.25rem 0.75rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  &__footer {
+    margin-top: auto;
+    padding: 1.25rem;
+  }
+
+  &--super-admin {
+    background-color: var(--color-bg-sidebar-dark);
+
+    .sidebar__link {
+      color: var(--color-text-secondary);
+
+      &--active {
+        background-color: var(--color-primary);
+        color: var(--color-text-inverse);
+      }
+    }
+
+    .sidebar__footer {
+      color: var(--color-text-inverse);
+    }
+  }
+
+  // --- ТЕМА: МЕРЧАНТ ---
+  &--merchant {
+    background-color: var(--color-bg-sidebar-light);
+
+    .sidebar__link {
+      color: var(--color-text-secondary);
+
+      &--active {
+        background-color: var(--color-primary-light);
+        color: var(--color-text-primary);
+      }
+    }
+  }
+}

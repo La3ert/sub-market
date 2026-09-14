@@ -1,0 +1,19 @@
+.dashboard-header {
+    padding: 0.5rem;
+    width: 100%;
+    background-color: var(--color-bg-surface);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    &__divider {
+        width: 1px;
+        height: 2rem;
+        background-color: var(--color-border);
+    }
+}

@@ -1,0 +1,16 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-main);
+  &--light {
+    color: var(--color-text-inverse);
+  }
+  padding: 0.5rem 1.25rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo__img {
+  max-width: 3rem;
+}
