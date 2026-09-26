@@ -1,5 +1,5 @@
-import Notifications from "../Notifications.tsx";
-import UserMenu from "../UserMenu.tsx";
+import Notifications from "../shared/Notifications.tsx";
+import UserMenu from "../shared/UserMenu.tsx";
 
 function DashboardHeader() {
     return (

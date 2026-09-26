@@ -2,10 +2,42 @@
 @use 'base/reset';
 
 @use 'layouts/dashboardLayout';
+@use 'layouts/publicLayout';
 
 @use 'components/dashboard/dashboardSidebar';
 @use 'components/dashboard/dashboardHeader';
 
-@use 'components/logo';
-@use 'components/notifications';
-@use 'components/userMenu';
+@use 'components/public/publicHeader';
+@use 'components/public/publicNavbar';
+@use 'components/public/publicFooter';
+@use 'components/public/hero';
+@use "components/public/howItWorks";
+@use "components/public/stepCard";
+@use "components/public/featuredCompanies";
+@use "components/public/companyCard";
+
+@use 'components/shared/dropdown';
+@use 'components/shared/logo';
+@use 'components/shared/notifications';
+@use 'components/shared/userMenu';
+@use 'components/shared/button';
+@use 'components/shared/eyebrow';
+
+@use 'components/public/home/audience';
+@use 'components/public/home/audienceCard';
+
+.container {
+  width: 100%;
+  max-width: 1556px;
+  margin: 0 auto;
+  padding: 0 2rem;
+
+  &--fluid {
+    max-width: none;
+    padding: 0 4vw;
+  }
+}
+
+.text-highlight {
+  color: var(--color-text-primary);
+}

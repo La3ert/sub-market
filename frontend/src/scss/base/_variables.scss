@@ -1,6 +1,7 @@
 :root {
   // Main colors
   --color-primary: #3861fd;
+  --color-primary-dark: #2563eb;
   --color-primary-light: #e9f0fe;
   --color-secondary: #9a73e2 ;
   --color-secondary-light: #efe3fe;
@@ -10,6 +11,7 @@
   --color-bg-sidebar-dark: #0b192f;
   --color-bg-sidebar-light: #fbfdff;
   --color-bg-surface: #fefefe;
+  --color-bg-surface-dark: #f2fafe;
 
   // Text colors
   --color-text-main: #04153a;
@@ -19,8 +21,8 @@
   --color-text-inverse: #f0f9ff;
 
   // Statuses
-  --colot-success: #f7fbfe;
-  --colos-success-light: #def3e3;
+  --color-success: #0d9e75;
+  --color-success-light: #def3e3;
   --color-warning: #fecb6c;
   --color-warning-light: #feeed3;
   --color-danger: #e17479;
@@ -29,7 +31,7 @@
 
   // Border colors
   --color-border: #e2e8f0;
-
+  --color-border-primary: var(--color-primary);
 }
 
 $bp-mobile: 480px;

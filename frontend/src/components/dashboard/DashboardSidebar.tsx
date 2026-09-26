@@ -1,4 +1,4 @@
-import Logo from "../Logo.tsx";
+import Logo from "../shared/Logo.tsx";
 import {NavLink} from "react-router-dom";
 
 
@@ -35,9 +35,11 @@ function DashboardSidebar({ role }: { role: Role }) {
         ? 'sidebar--super-admin'
         : 'sidebar--merchant';
 
+    const logoTheme = role === 'SUPER_ADMIN' ? 'light' : 'dark';
+
     return (
         <aside className={`sidebar ${themeModifier}`}>
-            <Logo />
+            <Logo theme={logoTheme} />
             <nav className="sidebar__nav">
                 {currentLinks.map((link) => (
                     <NavLink

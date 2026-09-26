@@ -1,0 +1,52 @@
+.company-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid;
+  padding: 0.75rem;
+  border-color: var(--color-border);
+  border-radius: 1rem;
+  gap: 0.5rem;
+
+  background-color: var(--color-bg-surface, #ffffff);
+
+
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04),
+  0 4px 8px rgba(0, 0, 0, 0.02);
+
+
+  &__logo {
+    padding: 1rem;
+    border-radius: 50%;
+    background-color: var(--color-primary-light);
+    svg {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+  &__name {
+    color: var(--color-text-main);
+  }
+
+  &__category {
+    color: var(--color-text-secondary);
+  }
+
+  &__rating {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__star {
+    color: orange;
+  }
+
+  &__score {
+    font-weight: 500;
+  }
+
+  &__reviews {
+    color: var(--color-text-secondary);
+  }
+}

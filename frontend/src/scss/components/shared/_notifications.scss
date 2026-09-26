@@ -1,3 +1,6 @@
 .notifications {
   color: var(--color-text-heading);
+  &--open {
+    color: var(--color-primary);
+  }
 }

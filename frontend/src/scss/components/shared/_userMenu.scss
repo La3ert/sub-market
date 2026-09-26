@@ -3,6 +3,9 @@
   gap: 1rem;
   align-items: center;
   margin-right: 1.5rem;
+  @media (max-width: 1200px) {
+    gap: 0.5rem;
+  }
 
   &__avatar {
     width: 2.5rem;
@@ -19,12 +22,18 @@
   &__name {
     color: var(--color-text-heading);
     font-weight: bolder;
+    @media (max-width: 1200px) {
+      display: none;
+    }
   }
 
   &__role {
     color: var(--color-text-secondary);
-    font-weight: normal;
     text-transform: capitalize;
+    font-weight: 500;
+    @media (max-width: 1200px) {
+      display: none;
+    }
   }
 
   &__chevron {

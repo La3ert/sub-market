@@ -1,0 +1,16 @@
+.eyebrow {
+  font-weight: 600;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  align-self: flex-start;
+
+  &--center {
+    align-self: center;
+  }
+
+  &--right {
+    align-self: flex-end;
+  }
+}

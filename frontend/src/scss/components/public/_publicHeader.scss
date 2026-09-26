@@ -1,0 +1,25 @@
+.public-header {
+  background-color: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.75rem 0;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__divider {
+    width: 1px;
+    height: 2rem;
+    background-color: var(--color-border);
+  }
+
+  &__authentication {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-self: end;
+  }
+}

@@ -1,0 +1,32 @@
+.audiences {
+  background-color: var(--color-bg-surface);
+  padding: 4rem 0;
+
+
+  &__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: stretch;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 1rem;
+      bottom: 1rem;
+      left: 50%;
+      width: 1px;
+      background-color: var(--color-border);
+      transform: translateX(-50%);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}

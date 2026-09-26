@@ -3,8 +3,6 @@ import { useAppSelector } from '../store/hooks';
 import DashboardSidebar from "../components/dashboard/DashboardSidebar.tsx";
 import DashboardHeader from "../components/dashboard/DashboardHeader.tsx";
 
-
-
 function DashboardLayout() {
     const role = useAppSelector((state) => state.auth.role);
 
