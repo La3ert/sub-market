@@ -1,0 +1,32 @@
+.built-for-success {
+  display: flex;
+  align-items: center;
+  padding: 4rem 0;
+
+  &__inner {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+
+  &__title {
+    color: var(--color-text-main);
+    max-width: 400px;
+  }
+
+  &__subtitle {
+    color: var(--color-text-secondary);
+    max-width: 550px;
+    font-weight: 500;
+    margin-bottom: 3rem;
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}

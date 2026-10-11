@@ -1,6 +1,8 @@
 import Hero from "../../components/public/Hero.tsx";
 import heroImgDesktop from "../../assets/images/tempHero.png";
 import HowItWorks from "../../components/public/HowItWorks.tsx";
+import BuiltForSuccess from "../../components/public/for-business/BuiltForSuccess.tsx";
+import JoinToday from "../../components/public/for-business/JoinToday.tsx";
 
 const HOW_IT_WORKS_STEPS = [
   {
@@ -117,12 +119,19 @@ function ForBusinessPage() {
         activeFeatures={["securePayments", "easyManagement", "accessToGrowing"]}
       />
 
+      <BuiltForSuccess />
+
       <HowItWorks
         eyebrowText={"HOW IT WORKS"}
         title={"Get Started in 4 Simple Steps"}
+        description={
+          "Join our platform and start receiving subscription in no time"
+        }
         align={"left"}
         steps={HOW_IT_WORKS_STEPS}
       />
+
+      <JoinToday/>
     </div>
   );
 }

@@ -1,0 +1,48 @@
+.join-today {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    border-radius: 1rem;
+    justify-content: space-between;
+    background-color: var(--color-bg-surface-dark);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 2rem 0;
+  }
+
+  &__title {
+    color: var(--color-text-main);
+    max-width: 400px;
+    font-size: 2rem;
+  }
+
+  &__description {
+    color: var(--color-text-secondary);
+    max-width: 550px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__visual {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &__image {
+    max-width: 40rem;
+  }
+}

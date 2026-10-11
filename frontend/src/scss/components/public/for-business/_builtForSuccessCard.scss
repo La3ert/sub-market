@@ -1,0 +1,49 @@
+.built-for-success-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid;
+  padding: 1.5rem;
+  border-color: var(--color-border);
+  border-radius: 1rem;
+  gap: 0.5rem;
+
+  background-color: var(--color-bg-surface, #ffffff);
+
+  &:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
+  }
+
+  &__icon {
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+    border-radius: 50%;
+    padding: 1rem;
+
+    svg {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+  &__title {
+    color: var(--color-text-main);
+  }
+
+  &__description {
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    flex-grow: 1;
+  }
+
+  &__link {
+    color: var(--color-text-primary);
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

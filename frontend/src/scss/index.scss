@@ -26,6 +26,10 @@
 @use 'components/public/home/audience';
 @use 'components/public/home/audienceCard';
 
+@use 'components/public/for-business/builtForSuccess';
+@use 'components/public/for-business/builtForSuccessCard';
+@use "components/public/for-business/joinToday";
+
 .container {
   width: 100%;
   max-width: 1556px;
