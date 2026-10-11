@@ -1,5 +1,5 @@
-import Eyebrow from "../../shared/Eyebrow.tsx";
 import BuiltForSuccessCard from "./BuiltForSuccessCard.tsx";
+import SectionLayout from "../SectionLayout.tsx";
 
 const SUCCESS_CARDS = [
   {
@@ -105,19 +105,16 @@ const SUCCESS_CARDS = [
 
 function BuiltForSuccess() {
   return (
-    <section className="built-for-success">
-      <div className="container built-for-success__inner">
-        <Eyebrow eyebrowText={"BUILT FOR YOUR SUCCESS"} />
-        <h2 className="built-for-success__title">
-          Everything You Need to Manage Your Subscription Business
-        </h2>
-        <p className="built-for-success__subtitle">
-          From storefront creation to detailed analytics, our platform gives you
-          the tools to attract customers, manage subscriptions, and grow
-          revenue.
-        </p>
-
-        <div className="built-for-success__container">
+    <SectionLayout
+      eyebrowText={"BUILT FOR YOUR SUCCESS"}
+      title={"Everything You Need to Manage Your Subscription Business"}
+      subtitle={
+        "From storefront creation to detailed analytics, our platform " +
+        "gives you the tools to attract customers, manage subscriptions, " +
+        "and grow revenue."
+      }
+      content={
+        <>
           {SUCCESS_CARDS.map((card) => (
             <BuiltForSuccessCard
               key={card.id}
@@ -126,9 +123,9 @@ function BuiltForSuccess() {
               description={card.description}
             />
           ))}
-        </div>
-      </div>
-    </section>
+        </>
+      }
+    />
   );
 }
 

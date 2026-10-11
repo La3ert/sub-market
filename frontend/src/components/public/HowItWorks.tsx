@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import StepCard from "./StepCard.tsx";
-import Eyebrow from "../shared/Eyebrow.tsx";
+import SectionLayout from "./SectionLayout.tsx";
 
 export interface StepItem {
   icon: ReactNode;
@@ -24,17 +24,14 @@ function HowItWorks({
   steps,
 }: HowItWorksProps) {
   return (
-    <section className="how-it-works">
-      <div className="container how-it-works__inner">
-        <div className={`how-it-works__header how-it-works__header--${align}`}>
-          <Eyebrow eyebrowText={eyebrowText} align={align} />
-          <h2 className="how-it-works__title">{title}</h2>
-          {description && (
-            <p className="how-it-works__description">{description}</p>
-          )}
-        </div>
-
-        <div className="how-it-works__grid">
+    <SectionLayout
+      backgroundColor={"dark"}
+      eyebrowText={eyebrowText}
+      align={align}
+      title={title}
+      subtitle={description}
+      content={
+        <>
           {steps.map((step, index) => (
             <StepCard
               key={index}
@@ -44,9 +41,9 @@ function HowItWorks({
               description={step.description}
             />
           ))}
-        </div>
-      </div>
-    </section>
+        </>
+      }
+    />
   );
 }
 

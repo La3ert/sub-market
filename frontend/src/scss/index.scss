@@ -11,10 +11,10 @@
 @use 'components/public/publicNavbar';
 @use 'components/public/publicFooter';
 @use 'components/public/hero';
-@use "components/public/howItWorks";
 @use "components/public/stepCard";
 @use "components/public/featuredCompanies";
 @use "components/public/companyCard";
+@use "components/public/sectionLayout";
 
 @use 'components/shared/dropdown';
 @use 'components/shared/logo';
@@ -26,7 +26,6 @@
 @use 'components/public/home/audience';
 @use 'components/public/home/audienceCard';
 
-@use 'components/public/for-business/builtForSuccess';
 @use 'components/public/for-business/builtForSuccessCard';
 @use "components/public/for-business/joinToday";
 

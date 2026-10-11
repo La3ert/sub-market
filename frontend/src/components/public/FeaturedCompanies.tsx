@@ -1,6 +1,7 @@
 import useEmblaCarousel from "embla-carousel-react";
 import CompanyCard, { type CompanyData } from "./CompanyCard.tsx";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
+import SectionLayout from "./SectionLayout.tsx";
 
 interface FeaturedCompaniesProps {
   title: string;
@@ -23,18 +24,10 @@ function FeaturedCompanies({
   );
 
   return (
-    <section className="featured-companies">
-      <div className="container">
-        <div className="featured-companies__header">
-          <div className="featured-companies__heading">
-            <h2 className="featured-companies__title">{title}</h2>
-            <p className="featured-companies__subtitle">{subtitle}</p>
-          </div>
-          <a href="/companies" className="featured-companies__link">
-            View all →
-          </a>
-        </div>
-
+    <SectionLayout
+      title={title}
+      subtitle={subtitle}
+      content={
         <div className="featured-companies__viewport" ref={emblaRef}>
           <div className="featured-companies__container">
             {companies.map((company) => (
@@ -44,8 +37,9 @@ function FeaturedCompanies({
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      }
+      contentType={"scroll"}
+    />
   );
 }
 

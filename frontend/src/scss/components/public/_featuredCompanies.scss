@@ -1,34 +1,10 @@
 .featured-companies {
-  padding: 4rem 0;
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
-
- &__title {
-   color: var(--color-text-main);
- }
-
-  &__subtitle {
-    color: var(--color-text-secondary);
-    font-weight: 500;
-  }
-
-  &__link {
-    color: var(--color-text-primary);
-    font-weight: 500;
-  }
-
   &__viewport {
     overflow: hidden;
   }
 
   &__container {
     display: flex;
-    backface-visibility: hidden;
     margin-left: -1.5rem;
   }
 
