@@ -1,4 +1,4 @@
-import BuiltForSuccessCard from "./BuiltForSuccessCard.tsx";
+import FeatureCard from "../../shared/FeatureCard.tsx";
 import SectionLayout from "../SectionLayout.tsx";
 
 const SUCCESS_CARDS = [
@@ -116,15 +116,18 @@ function BuiltForSuccess() {
       content={
         <>
           {SUCCESS_CARDS.map((card) => (
-            <BuiltForSuccessCard
+            <FeatureCard
               key={card.id}
               icon={card.icon}
               title={card.title}
               description={card.description}
+              linkText={"Learn more →"}
+              linkUrl={"#"}
             />
           ))}
         </>
       }
+      contentType={"default"}
     />
   );
 }

@@ -4,12 +4,14 @@ import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import SectionLayout from "./SectionLayout.tsx";
 
 interface FeaturedCompaniesProps {
+  eyebrowText?: string;
   title: string;
   subtitle: string;
   companies: CompanyData[];
 }
 
 function FeaturedCompanies({
+  eyebrowText,
   title,
   subtitle,
   companies,
@@ -25,6 +27,7 @@ function FeaturedCompanies({
 
   return (
     <SectionLayout
+      eyebrowText={eyebrowText}
       title={title}
       subtitle={subtitle}
       content={

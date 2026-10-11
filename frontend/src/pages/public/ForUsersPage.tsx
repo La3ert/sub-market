@@ -1,5 +1,9 @@
 import Hero from "../../components/public/Hero.tsx";
 import heroImgDesktop from "../../assets/images/tempHero.png";
+import Benefits from "../../components/public/for-users/Benefits.tsx";
+import FeaturedCompanies from "../../components/public/FeaturedCompanies.tsx";
+import { FEATURED_COMPANIES } from "../../data/featuredCompaniesData";
+import Explore from "../../components/public/for-users/Explore.tsx";
 
 function ForUsersPage() {
   return (
@@ -36,6 +40,17 @@ function ForUsersPage() {
         }
         secondaryBtnLabel="Create an Account"
         activeFeatures={["verifiedCompanies", "securePayments", "support247"]}
+      />
+
+      <Benefits />
+
+      <Explore />
+
+      <FeaturedCompanies
+        eyebrowText={"HANDPICKED"}
+        title={"Featured Companies"}
+        subtitle={"Top-rated companies, handpicked for you."}
+        companies={FEATURED_COMPANIES}
       />
     </div>
   );

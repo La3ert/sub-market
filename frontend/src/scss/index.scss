@@ -22,12 +22,15 @@
 @use 'components/shared/userMenu';
 @use 'components/shared/button';
 @use 'components/shared/eyebrow';
+@use 'components/shared/featureCard';
 
 @use 'components/public/home/audience';
 @use 'components/public/home/audienceCard';
 
-@use 'components/public/for-business/builtForSuccessCard';
 @use "components/public/for-business/joinToday";
+
+@use "components/public/for-users/explore";
+@use "components/public/for-users/exploreCard";
 
 .container {
   width: 100%;
