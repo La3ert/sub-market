@@ -127,7 +127,6 @@ function BuiltForSuccess() {
           ))}
         </>
       }
-      contentType={"default"}
     />
   );
 }

@@ -8,7 +8,7 @@ interface SectionProps {
   title: string;
   subtitle?: string;
   content: ReactNode;
-  contentType: "default" | "scroll";
+  contentType?: "default" | "scroll" | "full" | "grid-2";
 }
 
 function SectionLayout({

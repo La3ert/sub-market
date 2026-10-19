@@ -24,6 +24,7 @@
 
     &--center {
       align-self: center;
+      align-items: center;
     }
   }
 
@@ -35,7 +36,7 @@
 
   &__subtitle {
     color: var(--color-text-secondary);
-    max-width: 600px;
+    max-width: 700px;
     font-size: 1.25rem;
     font-weight: 500;
     margin-bottom: 2rem;
@@ -63,6 +64,22 @@
     &--scroll {
       display: block;
       min-width: 0;
+    }
+
+    &--full {
+      display: block;
+      width: 100%;
+    }
+
+    &--grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+
+      @media (max-width: 992px) {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+      }
     }
   }
 }
