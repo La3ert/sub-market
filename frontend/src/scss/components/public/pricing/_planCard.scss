@@ -1,0 +1,94 @@
+.plan-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  gap: 1rem;
+
+  &--primary {
+    background-color: var(--color-bg-surface-dark);
+    border: 1px solid var(--color-border-primary);
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__icon {
+    padding: 1rem;
+    border-radius: 50%;
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    svg {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+  &__badge {
+    background-color: var(--color-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    color: var(--color-text-inverse);
+    font-weight: 500;
+  }
+
+  &__name {
+    font-size: 1.5rem;
+    color: var(--color-text-main);
+  }
+
+  &__description {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+
+  &__features-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__feature {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    &-icon {
+      color: var(--color-success);
+      svg {
+        width: 1rem;
+      }
+    }
+    &-text {
+      color: var(--color-text-secondary);
+      font-weight: 500;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__price {
+    font-size: 2rem;
+    color: var(--color-text-main);
+
+    &-data {
+      display: flex;
+    }
+
+    &-period {
+      display: flex;
+      align-items: flex-end;
+      color: var(--color-text-secondary);
+      font-weight: 500;
+    }
+  }
+
+}

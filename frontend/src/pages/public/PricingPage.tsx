@@ -1,5 +1,8 @@
 import Hero from "../../components/public/Hero.tsx";
 import heroImgDesktop from "../../assets/images/PricingImg.png";
+import Plans from "../../components/public/pricing/Plans.tsx";
+import FeatureComparison from "../../components/public/pricing/FeatureComparison.tsx";
+import Faq from "../../components/public/pricing/Faq.tsx";
 
 function PricingPage() {
   return (
@@ -17,7 +20,13 @@ function PricingPage() {
         }
         desktopImgSrc={heroImgDesktop}
         activeFeatures={["noHiddenCosts", "cancelAnyTime", "support247"]}
-      ></Hero>
+      />
+
+      <Plans />
+
+      <FeatureComparison />
+
+      <Faq />
     </div>
   );
 }

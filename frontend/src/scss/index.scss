@@ -32,6 +32,10 @@
 @use "components/public/for-users/explore";
 @use "components/public/for-users/exploreCard";
 
+@use 'components/public/pricing/planCard';
+@use 'components/public/pricing/comparisonTable';
+@use "components/public/pricing/faqItem";
+
 .container {
   width: 100%;
   max-width: 1556px;
