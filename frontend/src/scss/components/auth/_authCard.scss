@@ -1,0 +1,29 @@
+.auth-card {
+  display: flex;
+  background-color: var(--color-bg-surface);
+  align-items: center;
+  flex-direction: column;
+  padding: 3rem 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.02);
+
+  width: 100%;
+  max-width: 480px;
+
+  &__title {
+    margin-top: 1rem;
+    font-size: 2rem;
+    color: var(--color-text-main);
+  }
+
+  &__description {
+    color: var(--color-text-secondary);
+    text-align: center;
+    font-weight: 500;
+  }
+
+  &__content {
+    width: 100%;
+    margin-top: 2rem;
+  }
+}

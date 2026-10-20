@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import DashboardLayout from "./layouts/DashboardLayout";
 import ProtectedRoute from "./components/guards/ProtectedRoute.tsx";
 import PublicLayout from "./layouts/PublicLayout.tsx";
@@ -6,6 +6,9 @@ import HomePage from "./pages/public/HomePage.tsx";
 import ForBusinessPage from "./pages/public/ForBusinessPage.tsx";
 import ForUsersPage from "./pages/public/ForUsersPage.tsx";
 import PricingPage from "./pages/public/PricingPage.tsx";
+import AuthLayout from "./layouts/AuthLayout.tsx";
+import RegisterPage from "./pages/auth/RegisterPage.tsx";
+import LoginPage from "./pages/auth/LoginPage.tsx";
 
 function App() {
   return (
@@ -18,6 +21,13 @@ function App() {
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/explore" />
           <Route path="/categories/:slug" />
+        </Route>
+
+        <Route element={<AuthLayout />}>
+          <Route path="/log-in" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/register/business" element={<RegisterPage />} />
+          <Route path="/auth" element={<Navigate to="/log-in" replace />} />
         </Route>
 
         <Route element={<ProtectedRoute allowedRoles={["SUPER_ADMIN"]} />}>

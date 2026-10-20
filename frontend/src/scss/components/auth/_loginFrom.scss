@@ -1,0 +1,90 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  &__utils {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+
+  &__remember-me {
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+  }
+
+  &__checkbox-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked ~ .login-form__checkbox-custom {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+
+      svg {
+        display: block;
+      }
+    }
+
+    &:focus-visible ~ .login-form__checkbox-custom {
+      outline: 2px solid var(--color-primary-light);
+      outline-offset: 2px;
+    }
+  }
+
+  &__checkbox-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    background-color: #fff;
+    border: 2px solid var(--color-border);
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+
+    svg {
+      display: none;
+      width: 0.75rem;
+      height: 0.75rem;
+      color: #fff;
+    }
+  }
+
+  &__forgot {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__register-prompt {
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+
+    a {
+      color: var(--color-primary);
+      font-weight: 600;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
