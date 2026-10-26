@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local environment files
+/.env
+
+# TypeScript build artifacts
+*.tsbuildinfo
