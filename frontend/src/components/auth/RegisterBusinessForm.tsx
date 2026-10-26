@@ -1,22 +1,25 @@
 import Input from "../shared/Input.tsx";
 import Button from "../shared/Button.tsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { type SyntheticEvent, useState } from "react";
+import { AuthService } from "../../services/auth.service.ts";
+import { message } from "antd";
 
 const UrlIcon = (
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -26,16 +29,16 @@ const UserIcon = (
     <path
       d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -50,16 +53,6 @@ const EmailIcon = (
   </svg>
 );
 
-const LockIcon = (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-    />
-  </svg>
-);
-
 const CompanyIcon = (
   <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -70,21 +63,103 @@ const CompanyIcon = (
 );
 
 function RegisterBusinessForm() {
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [companyWebsite, setCompanyWebsite] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate();
+
+  const handleRegisterBusiness = async (e: SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const formData = {
+      companyName,
+      ...(companyWebsite && { companyWebsite }),
+      firstName,
+      lastName,
+      email,
+      source: "register_business_form",
+    };
+
+    try {
+      const result = await AuthService.registerBusiness(formData);
+
+      await messageApi.success(
+        result.message || "Application submitted successfully!",
+        5,
+      );
+
+      navigate("/");
+    } catch (error) {
+      if (error instanceof Error) {
+        await messageApi.error(error.message);
+      } else {
+        await messageApi.error("Unexpected error occurred.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className={"register-form"}>
+    <form className={"register-form"} onSubmit={handleRegisterBusiness}>
+      {contextHolder}
+
       <div className={"register-form__full-name"}>
-        <Input placeholder={"First Name"} icon={UserIcon} />
-        <Input placeholder={"Last Name"} icon={UserIcon} />
+        <Input
+          placeholder={"First Name"}
+          icon={UserIcon}
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          required
+        />
+        <Input
+          placeholder={"Last Name"}
+          icon={UserIcon}
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          required
+        />
       </div>
-      <Input type={"email"} placeholder={"Work Email"} icon={EmailIcon} />
-      <Input type={"password"} placeholder={"Password"} icon={LockIcon} />
-      <Input placeholder={"Company Name"} icon={CompanyIcon} />
-      <Input type={"url"} placeholder={"Company Website"} icon={UrlIcon} />
-      <Button>Create Business Account</Button>
+
+      <Input
+        type={"email"}
+        placeholder={"Business Email"}
+        icon={EmailIcon}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+
+      <Input
+        placeholder={"Company Name"}
+        icon={CompanyIcon}
+        value={companyName}
+        onChange={(e) => setCompanyName(e.target.value)}
+        required
+      />
+
+      <Input
+        type={"url"}
+        placeholder={"Company Website (Optional)"}
+        icon={UrlIcon}
+        value={companyWebsite}
+        onChange={(e) => setCompanyWebsite(e.target.value)}
+      />
+
+      <Button type={"submit"} disabled={isLoading}>
+        {isLoading ? "Submitting..." : "Submit Application"}
+      </Button>
+
       <p className="register-form__login-prompt">
-        Already have an account? <Link to="/log-in">Sign in</Link>
+        Already have an account? <Link to="/login">Sign in</Link>
       </p>
-    </div>
+    </form>
   );
 }
 

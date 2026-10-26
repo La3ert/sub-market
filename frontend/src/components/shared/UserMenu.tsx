@@ -1,8 +1,18 @@
 import { useAppSelector } from "../../store/hooks.ts";
 import Dropdown from "./Dropdown.tsx";
+import { logout } from "../../store/authSlice.ts";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function UserMenu() {
-  const role = useAppSelector((state) => state.auth.role);
+  const { role, user } = useAppSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
 
   return (
     <Dropdown
@@ -13,7 +23,9 @@ function UserMenu() {
             <img src="/img.png" alt="avatar" />
           </div>
           <div className="user-menu__info">
-            <span className="user-menu__name">John Doe</span>
+            <span className="user-menu__name">
+              {user?.name || "Loading..."}
+            </span>
             <span className="user-menu__role">
               {role ? role.replace("_", " ").toLowerCase() : "USER"}
             </span>
@@ -38,7 +50,12 @@ function UserMenu() {
     >
       <button className="dropdown__item">Profile</button>
       <button className="dropdown__item">Settings</button>
-      <button className="dropdown__item dropdown__item--danger">Logout</button>
+      <button
+        className="dropdown__item dropdown__item--danger"
+        onClick={handleLogout}
+      >
+        Logout
+      </button>
     </Dropdown>
   );
 }

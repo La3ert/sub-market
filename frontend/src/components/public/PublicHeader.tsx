@@ -4,37 +4,34 @@ import UserMenu from "../shared/UserMenu.tsx";
 import Button from "../shared/Button.tsx";
 import PublicNavbar from "./PublicNavbar.tsx";
 
-
-
 function PublicHeader({ isAuthenticated }: { isAuthenticated: boolean }) {
-    return (
-        <div className="public-header">
-            <div className="container public-header__inner">
-                <Logo/>
+  return (
+    <div className="public-header">
+      <div className="container public-header__inner">
+        <Logo />
 
-                <PublicNavbar />
+        <PublicNavbar />
 
+        {isAuthenticated ? (
+          <div className="public-header__authentication">
+            <Notifications />
+            <div className="public-header__divider"></div>
+            <UserMenu />
+          </div>
+        ) : (
+          <div className="public-header__authentication public-header__authentication--not-logged">
+            <Button variant="outline" to="/login">
+              Log In
+            </Button>
 
-                {isAuthenticated ?
-                    (<div className="public-header__authentication">
-                        <Notifications />
-                        <div className="public-header__divider"></div>
-                        <UserMenu />
-                    </div>)
-                    :
-                    (<div className="public-header__authentication public-header__authentication--not-logged">
-                        <Button variant="outline" to="/log-in">
-                            Log In
-                        </Button>
-
-                        <Button variant="primary" to="/register">
-                            Get Started
-                        </Button>
-                    </div>)
-                }
-            </div>
-        </div>
-    );
+            <Button variant="primary" to="/register">
+              Get Started
+            </Button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default PublicHeader;

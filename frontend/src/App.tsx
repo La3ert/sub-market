@@ -9,8 +9,49 @@ import PricingPage from "./pages/public/PricingPage.tsx";
 import AuthLayout from "./layouts/AuthLayout.tsx";
 import RegisterPage from "./pages/auth/RegisterPage.tsx";
 import LoginPage from "./pages/auth/LoginPage.tsx";
+import { useDispatch } from "react-redux";
+import { AuthService } from "./services/auth.service.ts";
+import { logout, setCredentials, setInitialized } from "./store/authSlice.ts";
+import { useEffect } from "react";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token =
+        localStorage.getItem("token") || sessionStorage.getItem("token");
+
+      if (!token) {
+        dispatch(setInitialized());
+        return;
+      }
+
+      try {
+        const user = await AuthService.getMe();
+
+        dispatch(
+          setCredentials({
+            user: {
+              id: user.id,
+              email: user.email,
+              name: user.name,
+            },
+            token: token,
+            role: user.role,
+          }),
+        );
+      } catch (error) {
+        console.error("Auth check failed:", error);
+        dispatch(logout());
+      } finally {
+        dispatch(setInitialized());
+      }
+    };
+
+    checkAuth();
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -24,10 +65,10 @@ function App() {
         </Route>
 
         <Route element={<AuthLayout />}>
-          <Route path="/log-in" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/register/business" element={<RegisterPage />} />
-          <Route path="/auth" element={<Navigate to="/log-in" replace />} />
+          <Route path="/auth" element={<Navigate to="/login" replace />} />
         </Route>
 
         <Route element={<ProtectedRoute allowedRoles={["SUPER_ADMIN"]} />}>

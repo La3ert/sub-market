@@ -12,15 +12,18 @@ interface AuthState {
   role:
     "SUPER_ADMIN" | "MERCHANT_ADMIN" | "MERCHANT_MANAGER" | "CUSTOMER" | null;
   isAuthenticated: boolean;
+  isInitialized: boolean;
 }
+
+const storedToken =
+  localStorage.getItem("token") || sessionStorage.getItem("token");
 
 const initialState: AuthState = {
   user: null,
-  token: localStorage.getItem("token") || null,
+  token: storedToken || null,
   role: null,
-  isAuthenticated: !!localStorage.getItem("token"),
-  // role: 'SUPER_ADMIN',
-  // isAuthenticated: true,
+  isAuthenticated: !!storedToken,
+  isInitialized: false,
 };
 
 const authSlice = createSlice({
@@ -33,13 +36,23 @@ const authSlice = createSlice({
         user: UserProfile;
         token: string;
         role: AuthState["role"];
+        rememberMe?: boolean;
       }>,
     ) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.role = action.payload.role;
       state.isAuthenticated = true;
-      localStorage.setItem("token", action.payload.token);
+
+      if (action.payload.rememberMe !== undefined) {
+        if (action.payload.rememberMe) {
+          localStorage.setItem("token", action.payload.token);
+          sessionStorage.removeItem("token");
+        } else {
+          sessionStorage.setItem("token", action.payload.token);
+          localStorage.removeItem("token");
+        }
+      }
     },
     logout: (state) => {
       state.user = null;
@@ -47,9 +60,13 @@ const authSlice = createSlice({
       state.role = null;
       state.isAuthenticated = false;
       localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
+    },
+    setInitialized: (state) => {
+      state.isInitialized = true;
     },
   },
 });
 
-export const { setCredentials, logout } = authSlice.actions;
+export const { setCredentials, logout, setInitialized } = authSlice.actions;
 export default authSlice.reducer;

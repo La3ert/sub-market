@@ -8,7 +8,9 @@ function RegisterPage() {
   const isBusiness = location.pathname.includes("business");
 
   return (
-    <AuthCard title="Create an Account">
+    <AuthCard
+      title={`${!isBusiness ? "Create an Account" : "Apply for a Business Account"}`}
+    >
       <div className="role-toggle">
         <Link
           to="/register"

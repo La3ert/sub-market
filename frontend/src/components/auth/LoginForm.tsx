@@ -1,6 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../shared/Button.tsx";
 import Input from "../shared/Input.tsx";
+import { useState, type SyntheticEvent } from "react";
+import { AuthService } from "../../services/auth.service.ts";
+import { message } from "antd";
+
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../store/authSlice.ts";
 
 const EmailIcon = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -23,14 +29,79 @@ const LockIcon = (
 );
 
 function LoginForm() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogin = async (e: SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const result = await AuthService.login({ email, password });
+      await messageApi.success("Successfully logged in!");
+
+      dispatch(
+        setCredentials({
+          user: {
+            id: result.user.id,
+            email: result.user.email,
+            name: result.user.name,
+          },
+          token: result.token,
+          role: result.user.role,
+          rememberMe,
+        }),
+      );
+
+      navigate("/");
+
+      console.log("Server response:", result);
+    } catch (error) {
+      if (error instanceof Error) {
+        await messageApi.error(error.message);
+      } else {
+        await messageApi.error("Unexpected error occurred.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className="login-form">
-      <Input type="email" placeholder="Email Address" icon={EmailIcon} />
-      <Input type="password" placeholder="Password" icon={LockIcon} />
+    <form className="login-form" onSubmit={handleLogin}>
+      {contextHolder}
+
+      <Input
+        type="email"
+        placeholder="Email Address"
+        icon={EmailIcon}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <Input
+        type="password"
+        placeholder="Password"
+        icon={LockIcon}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
 
       <div className="login-form__utils">
         <label className="login-form__remember-me">
-          <input type="checkbox" className="login-form__checkbox-input" />
+          <input
+            type="checkbox"
+            className="login-form__checkbox-input"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+          />
           <span className="login-form__checkbox-custom">
             <svg
               viewBox="0 0 24 24"
@@ -53,12 +124,14 @@ function LoginForm() {
         </Link>
       </div>
 
-      <Button variant="primary">Sign In</Button>
+      <Button type="submit" variant="primary" disabled={isLoading}>
+        {isLoading ? "Signing In..." : "Sign In"}
+      </Button>
 
       <p className="login-form__register-prompt">
         Don't have an account? <Link to="/register">Sign up</Link>
       </p>
-    </div>
+    </form>
   );
 }
 
