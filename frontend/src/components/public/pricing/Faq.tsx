@@ -11,6 +11,7 @@ function Faq() {
         <>
           {PRICING_FAQ.map((faqQuestion) => (
             <FaqItem
+              key={faqQuestion.id}
               question={faqQuestion.question}
               answer={faqQuestion.answer}
             />

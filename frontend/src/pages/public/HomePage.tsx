@@ -114,7 +114,7 @@ function HomePage() {
           activeFeatures={[
             "trustedCompanies",
             "easyManagement",
-            "trustedCompanies",
+            "securePayments",
             "support247",
           ]}
         />

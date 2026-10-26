@@ -1,5 +1,6 @@
 import Eyebrow from "../../shared/Eyebrow.tsx";
 import Button from "../../shared/Button.tsx";
+import img from "../../../assets/images/for-business/join-today-img.png";
 
 function JoinToday() {
   return (
@@ -38,11 +39,7 @@ function JoinToday() {
           </div>
         </div>
         <div className="join-today__visual">
-          <img
-            className="join-today__image"
-            src={"../src/assets/images/for-business/join-today-img.png"}
-            alt={"join-today-img"}
-          />
+          <img className="join-today__image" src={img} alt={"join-today-img"} />
         </div>
       </div>
     </section>
