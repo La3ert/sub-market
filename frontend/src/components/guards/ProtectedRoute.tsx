@@ -2,22 +2,30 @@ import { useAppSelector } from "../../store/hooks";
 import { Navigate, Outlet } from "react-router-dom";
 
 interface ProtectedRouteProps {
-    allowedRoles?: Array<'SUPER_ADMIN' | 'MERCHANT_ADMIN' | 'MERCHANT_MANAGER' | 'CUSTOMER'>;
+  allowedRoles?: Array<
+    "SUPER_ADMIN" | "MERCHANT_ADMIN" | "MERCHANT_MANAGER" | "CUSTOMER"
+  >;
 }
 
 function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
-    const role = useAppSelector((state) => state.auth.role);
-    const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated )
+  const role = useAppSelector((state) => state.auth.role);
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
-    if (!isAuthenticated) {
-        return <Navigate to={"/login"} replace />
-    }
+  const isInitialized = useAppSelector((state) => state.auth.isInitialized);
 
-    if (allowedRoles && (!role || !allowedRoles.includes(role))) {
-        return <Navigate to="/" replace />;
-    }
+  if (!isInitialized) {
+    return null;
+  }
 
-    return <Outlet/>
+  if (!isAuthenticated) {
+    return <Navigate to={"/login"} replace />;
+  }
+
+  if (allowedRoles && (!role || !allowedRoles.includes(role))) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
+  return <Outlet />;
 }
 
 export default ProtectedRoute;

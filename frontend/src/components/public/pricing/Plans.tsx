@@ -15,6 +15,7 @@ function Plans() {
         <>
           {PRICING_PLANS.map((card) => (
             <PlanCard
+              key={card.id}
               id={card.id}
               icon={card.icon}
               name={card.name}

@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -40,67 +41,70 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  subscriptions Subscription[]
-  company       Company?
+  // subscriptions Subscription[]
 }
 
-model Category {
-  id   String @id @default(uuid())
-  name String
-  slug String @unique
-
-  companies Company[]
-}
+// model Category {
+//   id   String @id @default(uuid())
+//   name String
+//   slug String @unique
+//
+//   companies Company[]
+// }
 
 model Company {
-  id         String    @id @default(uuid())
-  categoryId String?
-  category   Category? @relation(fields: [categoryId], references: [id])
-
+  id          String        @id @default(uuid())
   name        String
   description String?
   websiteUrl  String?
   logoUrl     String?
   status      CompanyStatus @default(PENDING)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  staff         User[]
-  plans         Plan[]
-  subscriptions Subscription[]
-}
-
-model Plan {
-  id        String  @id @default(uuid())
-  companyId String
-  company   Company @relation(fields: [companyId], references: [id])
-
-  name     String
-  price    Float
-  currency String   @default("USD")
-  interval String   @default("MONTHLY")
-  features String[]
+  contactFirstName String
+  contactLastName  String
+  contactEmail String @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  subscriptions Subscription[]
+  staff User[]
+
+  // categoryId String?
+  // category   Category? @relation(fields: [categoryId], references: [id])
+  // plans         Plan[]
+  // subscriptions Subscription[]
 }
 
-model Subscription {
-  id        String  @id @default(uuid())
-  userId    String
-  user      User    @relation(fields: [userId], references: [id])
-  planId    String
-  plan      Plan    @relation(fields: [planId], references: [id])
-  companyId String
-  company   Company @relation(fields: [companyId], references: [id])
-
-  status    SubscriptionStatus @default(ACTIVE)
-  startDate DateTime           @default(now())
-  endDate   DateTime?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+// model Plan {
+//   id        String  @id @default(uuid())
+//   companyId String
+//   company   Company @relation(fields: [companyId], references: [id])
+//
+//   name     String
+//   price    Float
+//   currency String   @default("USD")
+//   interval String   @default("MONTHLY")
+//   features String[]
+//
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//
+//   subscriptions Subscription[]
+// }
+//
+// model Subscription {
+//   id        String  @id @default(uuid())
+//   userId    String
+//   user      User    @relation(fields: [userId], references: [id])
+//   planId    String
+//   plan      Plan    @relation(fields: [planId], references: [id])
+//   companyId String
+//   company   Company @relation(fields: [companyId], references: [id])
+//
+//   status    SubscriptionStatus @default(ACTIVE)
+//   startDate DateTime           @default(now())
+//   endDate   DateTime?
+//
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }

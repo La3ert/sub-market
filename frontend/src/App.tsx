@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import DashboardLayout from "./layouts/DashboardLayout";
 import ProtectedRoute from "./components/guards/ProtectedRoute.tsx";
 import PublicLayout from "./layouts/PublicLayout.tsx";
@@ -6,8 +6,60 @@ import HomePage from "./pages/public/HomePage.tsx";
 import ForBusinessPage from "./pages/public/ForBusinessPage.tsx";
 import ForUsersPage from "./pages/public/ForUsersPage.tsx";
 import PricingPage from "./pages/public/PricingPage.tsx";
+import AuthLayout from "./layouts/AuthLayout.tsx";
+import RegisterPage from "./pages/auth/RegisterPage.tsx";
+import LoginPage from "./pages/auth/LoginPage.tsx";
+import { useDispatch } from "react-redux";
+import { AuthService } from "./services/auth.service.ts";
+import { logout, setCredentials, setInitialized } from "./store/authSlice.ts";
+import { useEffect } from "react";
+import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage.tsx";
+import UnauthorizedPage from "./pages/auth/UnauthorizedPage.tsx";
+import NotFoundPage from "./pages/auth/NotFoundPage.tsx";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token =
+        localStorage.getItem("token") || sessionStorage.getItem("token");
+
+      if (!token) {
+        dispatch(setInitialized());
+        return;
+      }
+
+      try {
+        const user = await AuthService.getMe();
+
+        dispatch(
+          setCredentials({
+            user: {
+              id: user.id,
+              email: user.email,
+              name: user.name,
+            },
+            token: token,
+            role: user.role,
+          }),
+        );
+      } catch (error) {
+        if (
+          error instanceof Error &&
+          (error.message === "Unauthorized" ||
+            error.message === "No token found")
+        ) {
+          dispatch(logout());
+        }
+      } finally {
+        dispatch(setInitialized());
+      }
+    };
+
+    checkAuth();
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -18,6 +70,16 @@ function App() {
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/explore" />
           <Route path="/categories/:slug" />
+        </Route>
+
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/register/business" element={<RegisterPage />} />
+          <Route path="/auth" element={<Navigate to="/login" replace />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/unauthorized" element={<UnauthorizedPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
 
         <Route element={<ProtectedRoute allowedRoles={["SUPER_ADMIN"]} />}>

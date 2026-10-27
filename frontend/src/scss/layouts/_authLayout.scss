@@ -1,0 +1,14 @@
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-surface-dark);
+  padding: 2rem;
+
+  &__content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}

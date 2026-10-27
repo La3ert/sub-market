@@ -1,0 +1,27 @@
+.register-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  &__full-name {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__login-prompt {
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+
+    a {
+      color: var(--color-primary);
+      font-weight: 600;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

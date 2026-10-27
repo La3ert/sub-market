@@ -1,0 +1,14 @@
+.error-page {
+  &__action {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  &__link {
+    text-decoration: none;
+    width: 100%;
+    display: block;
+  }
+}

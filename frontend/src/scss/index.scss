@@ -3,6 +3,7 @@
 
 @use 'layouts/dashboardLayout';
 @use 'layouts/publicLayout';
+@use "layouts/authLayout";
 
 @use 'components/dashboard/dashboardSidebar';
 @use 'components/dashboard/dashboardHeader';
@@ -16,6 +17,11 @@
 @use "components/public/companyCard";
 @use "components/public/sectionLayout";
 
+@use "components/auth/authCard";
+@use "components/auth/loginFrom";
+@use "components/auth/registerForm";
+@use "components/auth/forgotPasswordForm";
+
 @use 'components/shared/dropdown';
 @use 'components/shared/logo';
 @use 'components/shared/notifications';
@@ -23,6 +29,7 @@
 @use 'components/shared/button';
 @use 'components/shared/eyebrow';
 @use 'components/shared/featureCard';
+@use "components/shared/input";
 
 @use 'components/public/home/audience';
 @use 'components/public/home/audienceCard';
@@ -35,6 +42,9 @@
 @use 'components/public/pricing/planCard';
 @use 'components/public/pricing/comparisonTable';
 @use "components/public/pricing/faqItem";
+
+@use "pages/auth/registerPage";
+@use "pages/auth/errorPage";
 
 .container {
   width: 100%;

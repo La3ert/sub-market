@@ -21,5 +21,23 @@ services:
       - "6379:6379"
     restart: unless-stopped
 
+  backend:
+    image: node:22-bookworm
+    container_name: submarket_backend
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - backend_node_modules:/app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+    command: sh -c "npm install --legacy-peer-deps && npx prisma generate && npm run start:dev"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
 volumes:
   pgdata:
+  backend_node_modules:
