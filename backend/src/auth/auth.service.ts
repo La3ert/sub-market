@@ -6,6 +6,7 @@ import {
 import { PrismaService } from '../prisma.service.js';
 import * as bcrypt from 'bcrypt';
 import {
+  ForgotPasswordDto,
   LoginDto,
   RegisterBusinessDto,
   RegisterPersonalDto,
@@ -114,6 +115,16 @@ export class AuthService {
         name: user.name,
         role: user.role,
       },
+    };
+  }
+
+  async forgotPassword(_dto: ForgotPasswordDto) {
+    // TODO: Add generation of a password reset token and sending of an email via Nodemailer
+
+    return {
+      status: 'success',
+      message:
+        'If an account with this email exists, a password reset link has been sent.',
     };
   }
 

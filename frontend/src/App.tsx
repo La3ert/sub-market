@@ -13,6 +13,9 @@ import { useDispatch } from "react-redux";
 import { AuthService } from "./services/auth.service.ts";
 import { logout, setCredentials, setInitialized } from "./store/authSlice.ts";
 import { useEffect } from "react";
+import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage.tsx";
+import UnauthorizedPage from "./pages/auth/UnauthorizedPage.tsx";
+import NotFoundPage from "./pages/auth/NotFoundPage.tsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,8 +45,13 @@ function App() {
           }),
         );
       } catch (error) {
-        console.error("Auth check failed:", error);
-        dispatch(logout());
+        if (
+          error instanceof Error &&
+          (error.message === "Unauthorized" ||
+            error.message === "No token found")
+        ) {
+          dispatch(logout());
+        }
       } finally {
         dispatch(setInitialized());
       }
@@ -69,6 +77,9 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/register/business" element={<RegisterPage />} />
           <Route path="/auth" element={<Navigate to="/login" replace />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/unauthorized" element={<UnauthorizedPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
 
         <Route element={<ProtectedRoute allowedRoles={["SUPER_ADMIN"]} />}>

@@ -71,7 +71,6 @@ function RegisterPersonalForm() {
         source: "register_personal_form",
       });
 
-      console.log("Response from backed:", result);
       await messageApi.success("Personal account created successfully!");
 
       dispatch(
@@ -83,6 +82,7 @@ function RegisterPersonalForm() {
           },
           token: result.token,
           role: result.user.role,
+          rememberMe: false,
         }),
       );
 

@@ -1,6 +1,5 @@
 import { useAppSelector } from "../../store/hooks";
 import { Navigate, Outlet } from "react-router-dom";
-import { setInitialized } from "../../store/authSlice.ts";
 
 interface ProtectedRouteProps {
   allowedRoles?: Array<
@@ -18,14 +17,12 @@ function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
     return null;
   }
 
-  setInitialized();
-
   if (!isAuthenticated) {
     return <Navigate to={"/login"} replace />;
   }
 
   if (allowedRoles && (!role || !allowedRoles.includes(role))) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/unauthorized" replace />;
   }
 
   return <Outlet />;

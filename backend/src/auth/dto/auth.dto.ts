@@ -11,10 +11,16 @@ import {
 import { Transform } from 'class-transformer';
 
 export class RegisterPersonalDto {
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   @IsString()
+  @IsNotEmpty({ message: 'First name cannot be empty' })
+  @MaxLength(50)
   firstName: string;
 
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   @IsString()
+  @IsNotEmpty({ message: 'Last name cannot be empty' })
+  @MaxLength(50)
   lastName: string;
 
   @Transform(({ value }) =>
@@ -34,23 +40,29 @@ export class RegisterPersonalDto {
 }
 
 export class RegisterBusinessDto {
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   @IsString()
   @IsNotEmpty()
+  @MaxLength(50)
   firstName: string;
 
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   @IsString()
   @IsNotEmpty()
+  @MaxLength(50)
   lastName: string;
+
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
+  @IsString()
+  @IsNotEmpty({ message: 'Company name cannot be empty' })
+  @MaxLength(100)
+  companyName: string;
 
   @Transform(({ value }) =>
     typeof value === 'string' ? value.toLowerCase().trim() : value,
   )
   @IsEmail()
   email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  companyName: string;
 
   @IsOptional()
   @ValidateIf((o) => o.companyWebsite !== '')
@@ -71,4 +83,16 @@ export class LoginDto {
 
   @IsString()
   password: string;
+}
+
+export class ForgotPasswordDto {
+  @Transform(({ value }) =>
+    typeof value === 'string' ? value.toLowerCase().trim() : value,
+  )
+  @IsEmail()
+  email: string;
+
+  @IsOptional()
+  @IsString()
+  source?: string;
 }

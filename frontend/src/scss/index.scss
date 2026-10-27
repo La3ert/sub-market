@@ -20,6 +20,7 @@
 @use "components/auth/authCard";
 @use "components/auth/loginFrom";
 @use "components/auth/registerForm";
+@use "components/auth/forgotPasswordForm";
 
 @use 'components/shared/dropdown';
 @use 'components/shared/logo';
@@ -43,6 +44,7 @@
 @use "components/public/pricing/faqItem";
 
 @use "pages/auth/registerPage";
+@use "pages/auth/errorPage";
 
 .container {
   width: 100%;

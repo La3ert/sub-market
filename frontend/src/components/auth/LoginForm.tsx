@@ -60,8 +60,6 @@ function LoginForm() {
       );
 
       navigate("/");
-
-      console.log("Server response:", result);
     } catch (error) {
       if (error instanceof Error) {
         await messageApi.error(error.message);

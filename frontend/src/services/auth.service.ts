@@ -3,7 +3,7 @@ export interface RegisterPersonalData {
   lastName: string;
   email: string;
   password?: string;
-  source?: string;
+  source: string;
 }
 
 export interface RegisterBusinessData {
@@ -18,6 +18,11 @@ export interface RegisterBusinessData {
 export interface loginData {
   email: string;
   password: string;
+}
+
+export interface forgotPasswordData {
+  email: string;
+  source: string;
 }
 
 export const AuthService = {
@@ -91,6 +96,25 @@ export const AuthService = {
     return response.json();
   },
 
+  forgotPassword: async (data: forgotPasswordData) => {
+    const response = await fetch("http://localhost:3000/auth/forgot-password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || "Something went wrong. Please try again later",
+      );
+    }
+
+    return response.json();
+  },
+
   getMe: async () => {
     const token =
       localStorage.getItem("token") || sessionStorage.getItem("token");
@@ -106,7 +130,11 @@ export const AuthService = {
     });
 
     if (!response.ok) {
-      throw new Error("Session expired");
+      if (response.status === 401) {
+        throw new Error("Unauthorized");
+      }
+
+      throw new Error("NetworkError");
     }
 
     return response.json();

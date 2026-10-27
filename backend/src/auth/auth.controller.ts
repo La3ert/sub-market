@@ -3,6 +3,7 @@ import {
   RegisterPersonalDto,
   RegisterBusinessDto,
   LoginDto,
+  ForgotPasswordDto,
 } from './dto/auth.dto.js';
 import { AuthService } from './auth.service.js';
 import { AuthGuard } from './auth.guard.js';
@@ -24,6 +25,11 @@ export class AuthController {
   @Post('login')
   async handleLogin(@Body() req: LoginDto) {
     return await this.authService.login(req);
+  }
+
+  @Post('forgot-password')
+  async handleForgotPassword(@Body() req: ForgotPasswordDto) {
+    return await this.authService.forgotPassword(req);
   }
 
   @UseGuards(AuthGuard)
