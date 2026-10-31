@@ -7,6 +7,9 @@ import {
 } from './dto/auth.dto.js';
 import { AuthService } from './auth.service.js';
 import { AuthGuard } from './auth.guard.js';
+import { RolesGuard } from './roles.guard.js';
+import { Roles } from './roles.decorator.js';
+import { Role } from '@prisma/client';
 
 @Controller('auth')
 export class AuthController {
@@ -36,5 +39,12 @@ export class AuthController {
   @Get('me')
   async getProfile(@Req() req: any) {
     return await this.authService.getMe(req.user.sub);
+  }
+
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.SUPER_ADMIN)
+  @Get('admin/ping')
+  async adminPing() {
+    return { message: 'Super admin access granted' };
   }
 }
