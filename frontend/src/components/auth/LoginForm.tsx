@@ -59,7 +59,17 @@ function LoginForm() {
         }),
       );
 
-      navigate("/");
+      const userRole = result.user.role;
+
+      if (userRole === "SUPER_ADMIN") {
+        navigate("/super-admin/dashboard");
+      } else if (userRole === "MERCHANT_ADMIN") {
+        navigate("/merchant/dashboard");
+      } else if (userRole === "MERCHANT_MANAGER") {
+        navigate("/merchant/plans");
+      } else {
+        navigate("/explore");
+      }
     } catch (error) {
       if (error instanceof Error) {
         await messageApi.error(error.message);

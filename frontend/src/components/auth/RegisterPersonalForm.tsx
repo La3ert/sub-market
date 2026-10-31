@@ -86,7 +86,7 @@ function RegisterPersonalForm() {
         }),
       );
 
-      navigate("/");
+      navigate("/explore");
     } catch (error) {
       if (error instanceof Error) {
         await messageApi.error(error.message);

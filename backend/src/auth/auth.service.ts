@@ -114,6 +114,7 @@ export class AuthService {
         email: user.email,
         name: user.name,
         role: user.role,
+        requiresPasswordChange: user.requiresPasswordChange,
       },
     };
   }
@@ -142,6 +143,7 @@ export class AuthService {
       email: user.email,
       name: user.name,
       role: user.role,
+      requiresPasswordChange: user.requiresPasswordChange,
     };
   }
 }
